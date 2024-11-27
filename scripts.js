@@ -61,3 +61,17 @@ function resetBoard() {
 })();
 
 cards.forEach(card => card.addEventListener('click', flipCard));
+
+
+
+const dialog = document.querySelector("dialog");
+const closeButton = document.querySelector("dialog button");
+
+window.onload = function(){
+  dialog.showModal();
+}
+// Le bouton "Fermer" ferme le dialogue
+closeButton.addEventListener("click", () => {
+  dialog.close();
+});
+
