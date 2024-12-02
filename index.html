@@ -11,22 +11,34 @@
 
 
 <body>
-  <dialog id="dialog">
-    <h1>Projet personnel</h1>
-    <hr>
-    <p>Desing web gr2 - Automne 2024</p>
-    <h2>Réaliser par</h2>
-    <p>Jérémie Jutras</p>
-    <h2>Inspiration</h2>
-    <a href=" https://marina-ferreira.github.io/memory-game/"> https://marina-ferreira.github.io/memory-game/</a>
-    <hr>
-    <img src="img/megaman.png" alt="megaman">
-    <button autofocus>Fermer la fenêtre</button>
-  </dialog>
-  
+    <dialog id="dialog">
+          <h1 id="projet">Projet personnel</h1>
+          <hr>
+          <p id="design">Desing web gr2 - Automne 2024</p>
+          <div id="realiser">
+            <div id="inspiration">
+              <h2>Réaliser par</h2>
+              <p>Jérémie Jutras</p>
+              <h2>Inspiration</h2>
+             <a href=" https://marina-ferreira.github.io/memory-game/"> https://marina-ferreira.github.io/memory-game/</a> 
+            </div>
+            <img id="img" src="img/megaman.png" alt="megaman">
+          </div>
+        <button id="fermer">Fermer la fenêtre</button>
+        <p id="fenêtre">Ne plus afficher la fenêtre</p>
+    </dialog>
+
   <div id="timer">
     temps : 0s
   </div>
+
+  <div id="carteRetourner">
+    <p></p>
+  </div>
+
+  <button id="effacer">Effacer le stockage</button>
+
+ 
 
   <section class="memory-game">
     <div class="memory-card" data-framework="aurelia">
@@ -84,10 +96,14 @@
     </div>
   </section>
 
-  <div id="end-game-message" style="display: none;">
+  <div id="finMessage" style="display: none;">
     <p>Félicitations ! Vous avez terminé en <span id="final-time"></span>.</p>
-    <button id="restart-button">Recommencer</button>
+    <div id="message">
+      <p>Petit message</p>
+    </div>
+    <button id="boutonRecommencer">Recommencer</button>
   </div>
+
 
   <script src="scripts.js"></script>
 </body>

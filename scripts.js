@@ -11,6 +11,8 @@ function flipCard() {
   if (this === firstCard) return;
 
   this.classList.add('flip');
+  // debute le compteur et compteur le nombre de carte retourner
+  CompterNombreCarteRetourner();
 
   if (!hasFlippedCard) {
     // first click
@@ -39,12 +41,12 @@ function disableCards() {
 
   resetBoard();
 
-  matchedCards++; // Incrémente le nombre de paires trouvées
+  matchedCards++; // Calcule le nombre de paires trouvées
 
   if (matchedCards === totalPairs) {
     clearInterval(chrono); // Arrête le timer
-    para.innerHTML += " - Bravo, toutes les cartes sont retournées !";
-    showEndMessage(); // Affiche le message de fin du jeu
+    temps.innerHTML += " - Bravo, toutes les cartes sont retournées !";
+    MessageFin(); // Affiche le message de fin du jeu
   }
 
 }
@@ -79,55 +81,126 @@ shuffle();
 cards.forEach(card => card.addEventListener('click', flipCard));
 
 
-
+//Je créer ces varibale pour le dialogue pour qu'il s'ouvrent au chargement de la page et le bouton pour fermer le dialogue.
+//Const dialog pour selectionner le dialogue
 const dialog = document.querySelector("dialog");
-const closeButton = document.querySelector("dialog button");
+//Const BoutonFermer pour selectionner le bouton qui va servir a fermer le bouton du dialogue.
+const BoutonFermer = document.querySelector("dialog button");
 
+//ceci ouvre la fenêtre du dialogue au chargement de la page
 window.onload = function(){
-  dialog.showModal();
+  if(localStorage.getItem("fenetre") == "oui"){
+    dialog.showModal();
+  }
+  
 }
 // Le bouton "Fermer" ferme le dialogue
-closeButton.addEventListener("click", () => {
+BoutonFermer.addEventListener("click", () => {
   dialog.close();
 });
 
+//Je créer ces variable pour le compteur de secondes ou bien le timer.
 let seconde = 0;
-let para = document.getElementById("timer")
-let chrono = window.setInterval(tictictic, 1000);
+let temps = document.getElementById("timer")
+let chrono = window.setInterval(CalculerTemps, 1000);
+let timerDebut = false;
 
-function tictictic() {
+function CalculerTemps() {
   seconde++;
-  para.innerHTML = "temps : " + seconde + "s"; // Met à jour le contenu du timer
+  temps.innerHTML = "temps : " + seconde + "s"; // Met à jour le contenu du timer
 }
 
-document.getElementById("restart-button").addEventListener("click", restartGame);
+// je prend le bouton recommencer pour ensuit lui dire lorsque je clique dessus, il lance la fontion recommencer la partie
+document.getElementById("boutonRecommencer").addEventListener("click", restartGame);
 
 function restartGame() {
   // Réinitialiser le compteur de paires et le timer
   matchedCards = 0;
   seconde = 0;
-  para.innerHTML = "temps : " + seconde + "s";
+  temps.innerHTML = "temps : " + seconde + "s";
+
+  //Recommence le compteur de carte retourner
+  totalCarteRetourner = 0;
 
   // Masquer le message de fin
-  document.getElementById('end-game-message').style.display = 'none';
+  document.getElementById('finMessage').style.display = 'none';
 
-  // Réactiver les cartes et réinitialiser leur état
+  // Réactiver les cartes et réinitialiser
   cards.forEach(card => {
     card.classList.remove('flip');
     card.addEventListener('click', flipCard);
   });
 
-  // Mélanger les cartes
+  // reMélanger les cartes
   shuffle();
 
   // Redémarrer le timer
   clearInterval(chrono);
-  chrono = setInterval(tictictic, 1000);
+  chrono = setInterval(CalculerTemps, 1000);
 }
 
-function showEndMessage() {
-  const endMessage = document.getElementById('end-game-message');
+//Cette fonction affiche un message a la fin de la partie
+function MessageFin() {
+  //Const finMessage est pour faire afficher le message de fin lorsque la partie est terminer
+  const finMessage = document.getElementById('finMessage');
+  //La const final-time, selection le message tu temps final et l'affiche avec le nombre de seconde total que l'utilisateur a pris pour terminer le jeu
   const finalTime = document.getElementById('final-time');
+
+  const messages = document.getElementById("message");
+  //Ceci affiche le nombre de seconde que l'utilisateur a pris pour terminer le jeu
   finalTime.textContent = `${seconde}s`;
-  endMessage.style.display = 'block';
+  //Ceci affiche le nombre de carte total retourner au courant de la partie
+  CarteRetourner.textContent = ` Nombre de carte total retourner : ${totalCarteRetourner}`;
+  //Ceci ajoute le texte du nombre de carte total retourner dans le message de fin
+  finMessage.appendChild(CarteRetourner);
+
+  const message = messageCarteRetourner();
+  messages.textContent = `${message}`;
+  
+  // Ceci modifie le message de fin, a la fin de la partie, le message devient visible
+  finMessage.style.display = 'block';
 }
+
+//Cette const, selectionne le texte de carte retourner
+const CarteRetourner = document.getElementById("carteRetourner");
+let totalCarteRetourner = 0;
+
+// Ceci met a jour le compteur total de carte que j'ai
+function CompterNombreCarteRetourner(){
+
+  totalCarteRetourner++;
+}
+
+//Fonction pour afficher un message si le nombre de carte retourner est trop élevé
+function messageCarteRetourner() {
+
+  if (totalCarteRetourner >= 30) {
+    return "Il y a place à l'amélioration.";
+  } 
+  else if (totalCarteRetourner >= 20) {
+    return "C'est bien ! Vous pouvez essayer de faire mieux, mais la difficulté augmente.";
+  }
+   else {
+    return "Félicitations ! Vous êtes très bon.";
+  }
+}
+const fenetre = document.getElementById("fenêtre");
+
+let fenetres = localStorage.getItem("fenetre");
+
+if(localStorage.getItem("fenetre") === null){
+  localStorage.setItem("fenetre", "oui");
+}
+function clickNon(){
+  localStorage.setItem("fenetre", "non");
+  dialog.close();
+}
+fenetre.addEventListener("click",clickNon )
+
+const effacerStockage = document.getElementById("effacer");
+
+function stockage(){
+  localStorage.clear();
+}
+
+effacerStockage.addEventListener("click",stockage);
