@@ -10,9 +10,11 @@ function flipCard() {
   if (lockBoard) return;
   if (this === firstCard) return;
 
+
   this.classList.add('flip');
   // debute le compteur et compteur le nombre de carte retourner
   CompterNombreCarteRetourner();
+
 
   if (!hasFlippedCard) {
     // first click
@@ -118,6 +120,8 @@ function restartGame() {
   matchedCards = 0;
   seconde = 0;
   temps.innerHTML = "temps : " + seconde + "s";
+  totalCarteRetourner = 0;
+  CarteChaqueFlip.innerHTML = "Nombre de carte retourner : " + totalCarteRetourner;
 
   //Recommence le compteur de carte retourner
   totalCarteRetourner = 0;
@@ -162,12 +166,18 @@ function MessageFin() {
 }
 
 //Cette const, selectionne le texte de carte retourner
-const CarteRetourner = document.getElementById("carteRetourner");
+const CarteChaqueFlip = document.getElementById("carteRetourner")
+const CarteRetourner = document.getElementById("messagess");
 let totalCarteRetourner = 0;
 
 // Ceci met a jour le compteur total de carte que j'ai
 function CompterNombreCarteRetourner(){
+  totalCarteRetourner++;  // Incrémente le nombre de cartes retournées
+  CarteChaqueFlip.innerHTML = "Nombre de carte retournée : " + totalCarteRetourner;  // Met à jour l'affichage
+}
 
+//Calcule le nombre de carte retourner a chaque fois que l'utilisateur tourne une carte
+function CarteRetourne(){
   totalCarteRetourner++;
 }
 
@@ -186,11 +196,14 @@ function messageCarteRetourner() {
 }
 const fenetre = document.getElementById("fenêtre");
 
+//Creer une variable pour le localstorage;
 let fenetres = localStorage.getItem("fenetre");
 
+// Si le localstorage fenetre est null donc si il a rien ilest la
 if(localStorage.getItem("fenetre") === null){
   localStorage.setItem("fenetre", "oui");
 }
+// Function de si on click sur ne plus afficher le message, il n'apparaiteras plus
 function clickNon(){
   localStorage.setItem("fenetre", "non");
   dialog.close();
@@ -199,8 +212,9 @@ fenetre.addEventListener("click",clickNon )
 
 const effacerStockage = document.getElementById("effacer");
 
+// ici est si j'appuie sur la touche effacer le stockage, je vais effacer le stockage et plus aucune information ne seras stocker
 function stockage(){
   localStorage.clear();
 }
-
+// efface le stockage lorsque j'appuie sur effacer le stockage
 effacerStockage.addEventListener("click",stockage);
