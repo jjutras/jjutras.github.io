@@ -10,6 +10,10 @@ function flipCard() {
   if (lockBoard) return;
   if (this === firstCard) return;
 
+ if (!timerDebut) {
+    chrono = setInterval(CalculerTemps, 1000);
+    timerDebut = true;
+  } // Empêche le redémarrage du timer
 
   this.classList.add('flip');
   // debute le compteur et compteur le nombre de carte retourner
@@ -102,14 +106,14 @@ BoutonFermer.addEventListener("click", () => {
 });
 
 //Je créer ces variable pour le compteur de secondes ou bien le timer.
+let chrono;
 let seconde = 0;
 let temps = document.getElementById("timer")
-let chrono = window.setInterval(CalculerTemps, 1000);
 let timerDebut = false;
 
-function CalculerTemps() {
-  seconde++;
-  temps.innerHTML = "temps : " + seconde + "s"; // Met à jour le contenu du timer
+function CalculerTemps() { 
+  seconde++; //Ceci est lorsque la function est utiliser, le seconde augmente
+  temps.innerText = "Temps : " + seconde + "s"; 
 }
 
 // je prend le bouton recommencer pour ensuit lui dire lorsque je clique dessus, il lance la fontion recommencer la partie
@@ -119,9 +123,13 @@ function restartGame() {
   // Réinitialiser le compteur de paires et le timer
   matchedCards = 0;
   seconde = 0;
-  temps.innerHTML = "temps : " + seconde + "s";
+  temps.innerHTML = "temps : 0s" ;
   totalCarteRetourner = 0;
   CarteChaqueFlip.innerHTML = "Nombre de carte retourner : " + totalCarteRetourner;
+
+  // Réinitialiser le timer
+  timerDebut = false;
+  clearInterval(chrono); // Arrêter l'ancien timer
 
   //Recommence le compteur de carte retourner
   totalCarteRetourner = 0;
@@ -138,9 +146,7 @@ function restartGame() {
   // reMélanger les cartes
   shuffle();
 
-  // Redémarrer le timer
-  clearInterval(chrono);
-  chrono = setInterval(CalculerTemps, 1000);
+
 }
 
 //Cette fonction affiche un message a la fin de la partie
@@ -188,7 +194,7 @@ function messageCarteRetourner() {
     return "Il y a place à l'amélioration.";
   } 
   else if (totalCarteRetourner >= 20) {
-    return "C'est bien ! Vous pouvez essayer de faire mieux, mais la difficulté augmente.";
+    return "C'est bien ! très bien";
   }
    else {
     return "Félicitations ! Vous êtes très bon.";
