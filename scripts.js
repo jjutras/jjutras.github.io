@@ -1,3 +1,4 @@
+
 const cards = document.querySelectorAll('.memory-card');
 
 let hasFlippedCard = false;
@@ -149,6 +150,11 @@ function restartGame() {
 
 }
 
+//Cette const, selectionne le texte de carte retourner
+const CarteChaqueFlip = document.getElementById("carteRetourner")
+const CarteRetourner = document.getElementById("messagess");
+let totalCarteRetourner = 0;
+
 //Cette fonction affiche un message a la fin de la partie
 function MessageFin() {
   //Const finMessage est pour faire afficher le message de fin lorsque la partie est terminer
@@ -160,7 +166,7 @@ function MessageFin() {
   //Ceci affiche le nombre de seconde que l'utilisateur a pris pour terminer le jeu
   finalTime.textContent = `${seconde}s`;
   //Ceci affiche le nombre de carte total retourner au courant de la partie
-  CarteRetourner.textContent = ` Nombre de carte total retourner : ${totalCarteRetourner}`;
+  CarteRetourner.innerText = ` Nombre de carte total retourner : ${totalCarteRetourner}`;
   //Ceci ajoute le texte du nombre de carte total retourner dans le message de fin
   finMessage.appendChild(CarteRetourner);
 
@@ -171,10 +177,7 @@ function MessageFin() {
   finMessage.style.display = 'block';
 }
 
-//Cette const, selectionne le texte de carte retourner
-const CarteChaqueFlip = document.getElementById("carteRetourner")
-const CarteRetourner = document.getElementById("messagess");
-let totalCarteRetourner = 0;
+
 
 // Ceci met a jour le compteur total de carte que j'ai
 function CompterNombreCarteRetourner(){
