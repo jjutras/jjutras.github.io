@@ -9,7 +9,7 @@ class Question {
     }
   }
   let questions = [
-    new Question("Qui dit cette phrase célèbre dans les Boys : Hey les Boys regarder moi a soir j'ai le moral d'une Cadilac a cause de qui a cause de Stan.", ["indexOf()", "map()", "filter()", "reduce()"], "filter()"),
+    new Question("", ["indexOf()", "map()", "filter()", "reduce()"], "filter()"),
     new Question("Quelle méthode Javascript permet de vérifier si un élément figure dans un tableau", ["isNaN()","includes()", "findIndex()", "isOdd()"], "includes()"),
     new Question("Quelle méthode transforme du JSON en un objet Javascript ?", ["JSON.parse()","JSON.stringify()", "JSON.object()", "JSON.toJS"], "JSON.parse()"),
     new Question("Quel objet Javascript permet d'arrondir à l'entier le plus proche", ["Math.ceil()","Math.floor()", "Math.round()", "Math.random()"], "Math.round()")
