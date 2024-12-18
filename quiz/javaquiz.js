@@ -18,6 +18,14 @@ class Question {
     new Question("Qui est le defenseur avec le plus grand nombre de but en carrère", ["Phil Housley","Al MacInnis", "Paul Coffey", "Raymond Bourque"], "Raymond Bourque"),
     new Question("Qui est le joueurs avec le plus grand nombre de partie jouer consécutive en carrière", ["Doug Jarvis","Keith Yandle", "Phil Kessel", "Garry Unger"], "Phil Kessel")
   ];
+
+  let questions2 = [
+    new Question("Quelle équipe a remporté la Coupe Stanley en 2021 ?", ["Lightning de Tampa Bay", "Avalanche du Colorado", "Golden Knights de Vegas", "Bruins de Boston"], "Lightning de Tampa Bay"),
+    new Question("Quelle équipe a le plus de titres de division ?", ["Canadiens de Montreal", "Blackhawks de Chicago", "Bruins de Boston", "Red Wings de Detroit"], "Red Wings de Detroit"),
+    new Question("Quelle équipe est surnommée les 'Maples Leafs' ?", ["Canadiens de Montréal", "Red Wings de Detroit", "Maple Leafs de Toronto", "Rangers de New York"], "Maple Leafs de Toronto"),
+    new Question("Quelle équipe a été fondée en 1972 ?", ["Sharks de San José", "Blues de Saint-Louis", "Capitals de Washington", "Flames de Calgary"], "Sharks de San José"),
+    new Question("Quel est le plus vieux club de la LNH ?", ["Canadiens de Montréal", "Bruins de Boston", "Rangers de New York", "Maple Leafs de Toronto"], "Canadiens de Montréal")
+  ];
   
   class Quiz {
     constructor(questions) {
@@ -87,6 +95,7 @@ class Question {
       display.question();
       display.choices();
       display.progress();
+      document.getElementById("backToMenuBtn").style.display = "inline-block";
     } 
   }
   // Create Quiz
@@ -102,4 +111,31 @@ class Question {
     else{
       return "Vous pouvez recommencer"
     }
+  }
+
+  document.getElementById("quiz1Btn").onclick = function(){
+    quiz = new Quiz (questions);
+    document.getElementById("quizMenu").style.display = "none";
+    document.getElementById("quiz").style.display = "block";
+    quizApp();
+  }
+
+  document.getElementById("quiz2Btn").onclick = function(){
+    quiz = new Quiz (questions2);
+    document.getElementById("quizMenu").style.display = "none";
+    document.getElementById("quiz").style.display = "block";
+    quizApp();
+  }
+
+  document.getElementById("records").onclick = function(){
+    quiz = new Quiz (questions);
+    document.getElementById("quizMenu").style.display = "none";
+    document.getElementById("quiz").style.display = "block";
+    quizApp();
+  }
+
+  document.getElementById("backToMenuBtn").onclick = function(){
+    document.getElementById("quizMenu").style.display = "block";
+    document.getElementById("quiz").style.display = "none";
+    document.getElementById("backToMenuBtn").style.display = "none";
   }

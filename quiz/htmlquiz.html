@@ -13,12 +13,22 @@
 <body>
 
   <div class="container">
+
+    <div id="quizMenu">
+      <h1>Selectionner un quiz</h1>
+      <button id="quiz1Btn" class="btn">Quiz sur les records de la LNH</button>
+      <img src="/img/nhl records.jpg" alt="records" id="records">
+      <button id="quiz2Btn" class="btn">Quiz sur les équipes de la LNH</button>
+      <button id="quiz3Btn" class="btn">Quiz sur les joueurs de la LNH</button>
+    </div>
     <div id="quiz">
       <h1><span>Quiz</span>hockey <i class="far fa-question-circle"></i></h1>
 
       <h2 id="question"></h2>
         
       <h3 id="score"></h3>
+
+     
 
       <div class="choices">
         <button id="guess0" class="btn">        
@@ -41,6 +51,8 @@
       <p id="progress"></p>
 
       <p id="messagesss"></p>
+
+      <button id="backToMenuBtn" class="btn" style="display:none;">Retour à l'accueil</button>
 
     </div>
   </div>
